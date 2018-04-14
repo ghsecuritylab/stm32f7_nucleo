@@ -16,7 +16,10 @@ extern "C" {
 #endif
 
 
+#include "cmdif.h"
+
 #include "core/led.h"
+#include "core/uart.h"
 
 
 

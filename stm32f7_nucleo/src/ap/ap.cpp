@@ -16,14 +16,21 @@
 
 void apInit(void)
 {
-
+  cmdifBegin(_DEF_UART1, 115200);
 }
 
 void apMain(void)
 {
+  uint32_t pre_time;
+
+  pre_time = millis();
   while(1)
   {
-    ledToggle(0);
-    delay(1000);
+    if (millis()-pre_time >= 500)
+    {
+      ledToggle(0);
+    }
+
+    cmdifMain();
   }
 }

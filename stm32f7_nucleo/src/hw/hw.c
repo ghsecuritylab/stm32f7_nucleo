@@ -17,7 +17,9 @@ void hwInit(void)
 {
   bspInit();
 
+  cmdifInit();
   ledInit();
+  uartInit();
 }
 
 void delay(uint32_t time_ms)
@@ -27,5 +29,5 @@ void delay(uint32_t time_ms)
 
 uint32_t millis(void)
 {
-  HAL_GetTick();
+  return HAL_GetTick();
 }

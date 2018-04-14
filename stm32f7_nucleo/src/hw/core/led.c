@@ -11,6 +11,8 @@
 #include "led.h"
 
 
+#ifdef _HW_DEF_USE_LED
+
 typedef struct
 {
   GPIO_TypeDef *port;
@@ -26,6 +28,11 @@ led_pin_t led_pin[LED_MAX_CH] =
        { GPIOB, GPIO_PIN_0, GPIO_PIN_SET},
        { GPIOB, GPIO_PIN_7, GPIO_PIN_SET},
     };
+
+
+#ifdef _HW_DEF_CMDIF_LED
+int ledCmdif(int argc, char **argv);
+#endif
 
 
 
@@ -44,6 +51,10 @@ void ledInit(void)
 
     ledOff(i);
   }
+
+#ifdef _HW_DEF_CMDIF_LED
+  cmdifAdd("led", ledCmdif);
+#endif
 }
 
 void ledOn(uint8_t ch)
@@ -69,3 +80,61 @@ void ledToggle(uint8_t ch)
     HAL_GPIO_TogglePin(led_pin[ch].port, led_pin[ch].number);
   }
 }
+
+
+
+
+#ifdef _HW_DEF_CMDIF_LED
+//-- ledCmdif
+//
+int ledCmdif(int argc, char **argv)
+{
+  bool ret = true;
+  uint8_t number;
+
+
+  if (argc == 3)
+  {
+    number = (uint8_t) strtoul((const char * ) argv[2], (char **)NULL, (int) 0);
+
+    if(strcmp("on", argv[1]) == 0)
+    {
+      ledOn(number);
+    }
+    else if(strcmp("off", argv[1])==0)
+    {
+      ledOff(number);
+    }
+    else if(strcmp("toggle", argv[1])==0)
+    {
+      ledToggle(number);
+    }
+    else if(strcmp("demo", argv[1])==0)
+    {
+      while(cmdifRxAvailable() == 0)
+      {
+        ledToggle(number);
+        delay(200);
+        cmdifPrintf("led toggle %d\n", number);
+      }
+    }
+    else
+    {
+      ret = false;
+    }
+  }
+  else
+  {
+    ret = false;
+  }
+
+  if (ret == false)
+  {
+    cmdifPrintf( "led on/off/toggle/demo number ...\n");
+  }
+
+  return 0;
+}
+#endif
+
+#endif
