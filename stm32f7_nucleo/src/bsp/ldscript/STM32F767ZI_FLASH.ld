@@ -217,4 +217,8 @@ SECTIONS
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
   .NoneCacheableMem (NOLOAD): { *(.NoneCacheableMem) } >DTCMRAM
+  .RxDecripSection : { *(.DMARxDscrTab_section) } >DTCMRAM
+  .TxDescripSection : { *(.DMATxDscrTab_section) } >DTCMRAM
+  .RxarraySection : { *(.Rx_Buff_section) } >DTCMRAM
+  .TxarraySection : { *(.Tx_Buff_section) } >DTCMRAM  
 }

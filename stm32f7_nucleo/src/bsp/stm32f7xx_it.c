@@ -166,7 +166,10 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f7xx.s).                                               */
 /******************************************************************************/
-
-
+extern ETH_HandleTypeDef EthHandle;
+void ETH_IRQHandler(void)
+{
+  HAL_ETH_IRQHandler(&EthHandle);
+}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
