@@ -39,6 +39,7 @@
 								<option id="com.atollic.truestudio.gcc.directories.select.1418813056" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/ap}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/lib/STM32F7xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/bsp/rtos/FreeRTOS/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/bsp/cmsis/Include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/bsp}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
@@ -70,6 +71,7 @@
 								<option id="com.atollic.truestudio.gpp.directories.select.1766066988" name="Include path" superClass="com.atollic.truestudio.gpp.directories.select" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/ap}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/lib/STM32F7xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/bsp/rtos/FreeRTOS/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/bsp/cmsis/Include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/bsp}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
@@ -103,6 +105,9 @@
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.1921570618" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput"/>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry excluding="src/bsp/rtos/FreeRTOS/heap_5.c|src/bsp/rtos/FreeRTOS/heap_3.c|src/bsp/rtos/FreeRTOS/heap_2.c|src/bsp/rtos/FreeRTOS/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_5.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_3.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_2.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/Keil|src/bsp/rtos/FreeRTOS/Source/portable/IAR|src/bsp/rtos/FreeRTOS/Source/portable/Tasking|src/bsp/rtos/FreeRTOS/Source/portable/RVDS|src/lib/LwIP" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -177,6 +182,9 @@
 							<tool id="com.atollic.truestudio.exe.release.toolchain.secoutput.1716763222" name="Other" superClass="com.atollic.truestudio.exe.release.toolchain.secoutput"/>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry excluding="src/bsp/rtos/FreeRTOS/heap_5.c|src/bsp/rtos/FreeRTOS/heap_3.c|src/bsp/rtos/FreeRTOS/heap_2.c|src/bsp/rtos/FreeRTOS/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_5.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_3.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_2.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/Keil|src/bsp/rtos/FreeRTOS/Source/portable/IAR|src/bsp/rtos/FreeRTOS/Source/portable/Tasking|src/bsp/rtos/FreeRTOS/Source/portable/RVDS|src/lib/LwIP" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

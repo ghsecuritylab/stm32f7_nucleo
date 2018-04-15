@@ -11,6 +11,8 @@
 
 #include "def.h"
 #include "stm32f7xx.h"
+#include "rtos/rtos.h"
+
 
 #ifdef __cplusplus
 extern "C" {

@@ -24,7 +24,14 @@ void hwInit(void)
 
 void delay(uint32_t time_ms)
 {
-  HAL_Delay(time_ms);
+  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+  {
+    HAL_Delay(time_ms);
+  }
+  else
+  {
+    osDelay(time_ms);
+  }
 }
 
 uint32_t millis(void)
