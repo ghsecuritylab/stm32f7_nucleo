@@ -68,8 +68,7 @@
 /* Exported functions ------------------------------------------------------- */
 void User_notification(struct netif *netif);
 #ifdef USE_DHCP
-void DHCP_Process(struct netif *netif);
-void DHCP_Periodic_Handle(struct netif *netif);
+void DHCP_thread(void const * argument);
 #endif  
 
 #ifdef __cplusplus

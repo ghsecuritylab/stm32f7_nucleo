@@ -113,6 +113,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="src/lib/LwIP/src/netif/ethernetif_template.c|src/lib/LwIP/src/apps|src/lib/LwIP/doc|src/lib/LwIP/test|src/lib/LwIP/system|src/bsp/rtos/FreeRTOS/heap_5.c|src/bsp/rtos/FreeRTOS/heap_3.c|src/bsp/rtos/FreeRTOS/heap_2.c|src/bsp/rtos/FreeRTOS/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_5.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_3.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_2.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/Keil|src/bsp/rtos/FreeRTOS/Source/portable/IAR|src/bsp/rtos/FreeRTOS/Source/portable/Tasking|src/bsp/rtos/FreeRTOS/Source/portable/RVDS" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/LwIP/system/OS"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -190,6 +191,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="src/lib/LwIP/src/netif/ethernetif_template.c|src/lib/LwIP/src/apps|src/lib/LwIP/doc|src/lib/LwIP/test|src/lib/LwIP/system|src/bsp/rtos/FreeRTOS/heap_5.c|src/bsp/rtos/FreeRTOS/heap_3.c|src/bsp/rtos/FreeRTOS/heap_2.c|src/bsp/rtos/FreeRTOS/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_5.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_3.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_2.c|src/bsp/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c|src/bsp/rtos/FreeRTOS/Source/portable/Keil|src/bsp/rtos/FreeRTOS/Source/portable/IAR|src/bsp/rtos/FreeRTOS/Source/portable/Tasking|src/bsp/rtos/FreeRTOS/Source/portable/RVDS" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/LwIP/system/OS"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

@@ -511,6 +511,65 @@ err_t ethernetif_init(struct netif *netif)
   return ERR_OK;
 }
 
+/**
+  * @brief  This function sets the netif link status.
+  * @param  netif: the network interface
+  * @retval None
+  */
+void ethernetif_set_link(void const *argument)
+{
+  uint32_t regvalue = 0;
+  struct link_str *link_arg = (struct link_str *)argument;
+
+  for(;;)
+  {
+    //if (osSemaphoreWait( link_arg->semaphore, 100)== osOK)
+    {
+#if 0
+      /* Read PHY_MISR*/
+      HAL_ETH_ReadPHYRegister(&EthHandle, PHY_MISR, &regvalue);
+
+      /* Check whether the link interrupt has occurred or not */
+      if((regvalue & PHY_LINK_INTERRUPT) != (uint16_t)RESET)
+      {
+        /* Read PHY_SR*/
+        HAL_ETH_ReadPHYRegister(&EthHandle, PHY_SR, &regvalue);
+
+        /* Check whether the link is up or down*/
+        if((regvalue & PHY_LINK_STATUS)!= (uint16_t)RESET)
+        {
+          netif_set_link_up(link_arg->netif);
+        }
+        else
+        {
+          netif_set_link_down(link_arg->netif);
+        }
+      }
+#endif
+      HAL_ETH_ReadPHYRegister(&EthHandle, PHY_ISFR, &regvalue);
+
+
+      if((regvalue) & (1<<6) && (regvalue) & (1<<4))
+      {
+        /* Read PHY_SR*/
+        HAL_ETH_ReadPHYRegister(&EthHandle, PHY_SR, &regvalue);
+
+        /* Check whether the link is up or down*/
+        if((regvalue & PHY_LINKED_STATUS) == 0)
+        {
+          netif_set_link_up(link_arg->netif);
+        }
+      }
+      else if((regvalue) & (1<<4))
+      {
+        netif_set_link_down(link_arg->netif);
+      }
+
+      delay(100);
+    }
+  }
+}
+
 
 /**
   * @brief  Link callback function, this function is called on change of link status

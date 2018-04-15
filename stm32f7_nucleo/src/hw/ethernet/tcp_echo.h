@@ -27,10 +27,10 @@
  * This file is part of the lwIP TCP/IP stack.
  * 
  */
-#ifndef __ECHO_H__
-#define __ECHO_H__
+#ifndef __TCPECHO_H__
+#define __TCPECHO_H__
 
 
-void udp_echoserver_init(void);
+void tcpecho_init(void);
 
 #endif /* __MINIMAL_ECHO_H */

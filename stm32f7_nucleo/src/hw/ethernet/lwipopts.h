@@ -49,7 +49,7 @@
  * NO_SYS==1: Provides VERY minimal functionality. Otherwise,
  * use lwIP facilities.
  */
-#define NO_SYS                  1
+#define NO_SYS                  0
 
 /**
  * SYS_LIGHTWEIGHT_PROT==0: disable inter-task protection (and task-vs-interrupt
@@ -202,7 +202,7 @@ The STM32F7xxallows computing and verifying the IP, UDP, TCP and ICMP checksums 
 /**
  * LWIP_NETCONN==1: Enable Netconn API (require to use api_lib.c)
  */
-#define LWIP_NETCONN                    0
+#define LWIP_NETCONN                    1
 
 /*
    ------------------------------------
@@ -214,6 +214,23 @@ The STM32F7xxallows computing and verifying the IP, UDP, TCP and ICMP checksums 
  */
 #define LWIP_SOCKET                     0
 
+
+/*
+   ---------------------------------
+   ---------- OS options ----------
+   ---------------------------------
+*/
+
+#define TCPIP_THREAD_NAME              "TCP/IP"
+#define TCPIP_THREAD_STACKSIZE          1000
+#define TCPIP_MBOX_SIZE                 6
+#define DEFAULT_UDP_RECVMBOX_SIZE       6
+#define DEFAULT_TCP_RECVMBOX_SIZE       6
+#define DEFAULT_ACCEPTMBOX_SIZE         6
+#define DEFAULT_THREAD_STACKSIZE        500
+#define TCPIP_THREAD_PRIO               osPriorityHigh
+
+#define USE_DHCP
 
 #endif /* __LWIPOPTS_H__ */
 

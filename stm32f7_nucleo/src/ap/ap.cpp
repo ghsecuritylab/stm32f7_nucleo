@@ -14,12 +14,14 @@ extern "C"
 {
 #include "lwip/opt.h"
 #include "lwip/init.h"
+#include "lwip/tcpip.h"
 #include "lwip/netif.h"
 #include "lwip/timeouts.h"
 #include "netif/etharp.h"
 #include "ethernet/ethernetif.h"
 #include "ethernet/app_ethernet.h"
-#include "ethernet/udp_echoserver.h"
+#include "udp_echo.h"
+#include "tcp_echo.h"
 }
 
 static void threadMain(const void *argument);
@@ -34,7 +36,7 @@ void apInit(void)
 
 void apMain(void)
 {
-  osThreadDef(threadMain, threadMain, osPriorityBelowNormal, 0, 6*1024/4);
+  osThreadDef(threadMain, threadMain, osPriorityNormal, 0, 6*1024/4);
   osThreadCreate(osThread(threadMain), NULL);
 
   osKernelStart ();
@@ -45,7 +47,7 @@ static void threadMain(const void *argument)
   uint32_t pre_time;
 
 
-  osThreadDef(threadUDP, threadUDP, osPriorityBelowNormal, 0, 6*1024/4);
+  osThreadDef(threadUDP, threadUDP, osPriorityNormal, 0, 6*1024/4);
   osThreadCreate(osThread(threadUDP), NULL);
 
 
@@ -65,38 +67,42 @@ static void threadMain(const void *argument)
 
 
 struct netif gnetif;
+osSemaphoreId Netif_LinkSemaphore = NULL;
+struct link_str link_arg;
 static void Netif_Config(void);
 
 
 static void threadUDP(const void *argument)
 {
   /* Initialize the LwIP stack */
-  lwip_init();
+  //lwip_init();
+  tcpip_init(NULL, NULL);
 
   /* Configure the Network interface */
   Netif_Config();
 
+  /* Initialize tcp echo server */
+  tcpecho_init();
+
   /* tcp echo server Init */
-  udp_echoserver_init();
+  udpecho_init();
 
   /* Notify user about the network interface config */
   User_notification(&gnetif);
 
-
-  /* Infinite loop */
-  while (1)
-  {
-    /* Read a received packet from the Ethernet buffers and send it
-       to the lwIP for handling */
-    ethernetif_input(&gnetif);
-
-    /* Handle timeouts */
-    sys_check_timeouts();
-
 #ifdef USE_DHCP
-    /* handle periodic timers for DHCP */
-    DHCP_Periodic_Handle(&gnetif);
+  /* Start DHCPClient */
+  osThreadDef(DHCP, DHCP_thread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 2);
+  if (osThreadCreate (osThread(DHCP), &gnetif) == NULL)
+  {
+    cmdifPrintf("osThreadCreate Fail : DHCP_thread\n");
+  }
 #endif
+
+  for( ;; )
+  {
+    /* Delete the Init Thread*/
+    osThreadTerminate(NULL);
   }
 }
 
@@ -140,5 +146,18 @@ static void Netif_Config(void)
 
   /* Set the link callback function, this function is called on change of link status*/
   netif_set_link_callback(&gnetif, ethernetif_update_config);
+
+  /* create a binary semaphore used for informing ethernetif of frame reception */
+  osSemaphoreDef(Netif_SEM);
+  Netif_LinkSemaphore = osSemaphoreCreate(osSemaphore(Netif_SEM) , 1 );
+
+  link_arg.netif = &gnetif;
+  link_arg.semaphore = Netif_LinkSemaphore;
+  /* Create the Ethernet link handler thread */
+  osThreadDef(ethernetif_set_link, ethernetif_set_link, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 5);
+  if (osThreadCreate (osThread(ethernetif_set_link), &link_arg) == NULL)
+  {
+    cmdifPrintf("osThreadCreate Fail : ethernetif_set_link\n");
+  }
 }
 
